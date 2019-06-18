@@ -12,6 +12,7 @@ export class CanvasChartsComponent implements OnInit {
   courseName: string;
   marks: number[] = [];
   allStudentsData: any[] = [];
+  allStudentsDataForExcel: any[] = [];
   allStudentsSuccess: any[] = [];
   allStudentsFail: any[] = [];
   average: number;
@@ -37,15 +38,20 @@ export class CanvasChartsComponent implements OnInit {
         this.allStudentsData.push({ nombre: response[i].user.name, notas: marksBrute });
 // tslint:disable-next-line: only-arrow-functions CALCULO DE PROMEDIO
         this.average =  ( (this.marks.reduce( function(a, b) { return a + b; })) / this.marks.length);
-
+        this.allStudentsDataForExcel.push({ nombre: response[i].user.name, notas: marksBrute});
         if (marksBrute >= 13 ) {
           this.allStudentsSuccess.push({ nombre: response[i].user.name, notas: marksBrute });
+          this.allStudentsDataForExcel.push({ aprobados: response[i].user.name});
         } else {
           this.allStudentsFail.push({ nombre: response[i].user.name, notas: marksBrute });
+          this.allStudentsDataForExcel.push({ desaprobados: response[i].user.name});
         }
       }
+      this.allStudentsDataForExcel.push({ promedio: this.average});
     });
-
   }
 
+    exportAsXLSX() {
+    this.localService.exportAsExcelFile(this.allStudentsDataForExcel, this.courseName);
+ }
 }
