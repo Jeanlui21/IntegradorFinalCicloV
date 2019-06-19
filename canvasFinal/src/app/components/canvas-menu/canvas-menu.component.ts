@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-canvas-menu',
@@ -8,9 +11,23 @@ import { Location } from '@angular/common';
 })
 export class CanvasMenuComponent implements OnInit {
 
-  constructor( private location: Location) { }
+  constructor( private router: Router, private location: Location, private authService: AuthService, private afsAuth: AngularFireAuth) { }
+  public isLogged: boolean = false;
 
   ngOnInit() {
+    this.getCurrentUser();
+  }
+
+  getCurrentUser() {
+    this.authService.isAuth().subscribe(auth => {
+      if (auth) {
+        console.log('user logged');
+        this.isLogged = true;
+      } else {
+        console.log('NOT user logged');
+        this.isLogged = false;
+      }
+    });
   }
 
   hideMenu() {
@@ -24,6 +41,11 @@ export class CanvasMenuComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  onLogout() {
+    this.afsAuth.auth.signOut();
+    this.router.navigate(['user/login']);
   }
 
 }
