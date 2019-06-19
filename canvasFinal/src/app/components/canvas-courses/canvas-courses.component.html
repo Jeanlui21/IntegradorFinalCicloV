@@ -25,7 +25,6 @@
 
           <div class="dropdown-menu">
             <a href="#" class="dropdown-item">Estudiantes</a>
-            <a href="#" class="dropdown-item">Actividades</a>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">Enviar Mensaje <em>Proximamente</em> </a>
           </div>
@@ -40,7 +39,7 @@
       <!-- Inicio Cards-->
       <div class="card text-dark bg-white mb-3 view overlay zoom" (click)="goGoto(courses.id,courses.name)" style="max-width: 20rem;">
 
-          <img class="card-img-top" src="https://picsum.photos/id/{{ courses.account_id }}/200/150">
+          <img class="card-img-top" src="https://picsum.photos/id/{{ courses.id }}/200/150">
           <div class="card-body cardi">
             <h5 class="card-title">{{ courses.name }}</h5>
 

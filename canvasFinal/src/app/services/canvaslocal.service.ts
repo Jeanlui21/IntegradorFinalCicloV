@@ -28,8 +28,8 @@ export class CanvasLocal {
   }
 
   getCanvasCourses() {
-    // https://canvas-api-wquesada.c9users.io/api/courses/ -> AWS -> http://3.19.68.210/api/courses/
-    const pathUrl = 'https://canvas-api-wquesada.c9users.io/api/courses/';
+    // https://canvas-api-wquesada.c9users.io/api/courses/ -> AWS -> http://3.19.68.210/api/courses/ http://18.222.195.200:3000/api/courses || http://18.222.195.200:3000/api/courses/3/assignments
+    const pathUrl = 'http://18.222.195.200:3000/api/courses/';
     return this.Http.get(pathUrl);
   }
 
@@ -38,7 +38,7 @@ export class CanvasLocal {
   }
 
   getCourseData( courseId ) {
-    return this.Http.get('https://canvas-api-wquesada.c9users.io/api/courses/' + courseId + '/enrollments');
+    return this.Http.get('http://18.222.195.200:3000/api/courses/' + courseId + '/enrollments');
   }
 
   setcourseParameters(courseId, courseName) {

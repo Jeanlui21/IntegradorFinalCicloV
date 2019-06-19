@@ -28,16 +28,20 @@ export class CanvasChartsComponent implements OnInit {
 
     this.localService.getCourseData(this.courseId).subscribe((response: any) => {
       this.datos = response;
+
 // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < response.length; i++ ) {
 
         const marksBrute = Math.round(response[i].grades.current_score * 0.20);
-// Objeto Notas
+
         this.marks.push(marksBrute);
-// Objeto Todos Estudiantes
+
         this.allStudentsData.push({ nombre: response[i].user.name, notas: marksBrute });
-// tslint:disable-next-line: only-arrow-functions CALCULO DE PROMEDIO
-        this.average =  ( (this.marks.reduce( function(a, b) { return a + b; })) / this.marks.length);
+
+        this.average =  Math.round(( (this.marks.reduce( function(a, b) { return a + b; })) / this.marks.length));
+
+
+
         this.allStudentsDataForExcel.push({ nombre: response[i].user.name, notas: marksBrute});
         if (marksBrute >= 13 ) {
           this.allStudentsSuccess.push({ nombre: response[i].user.name, notas: marksBrute });
@@ -54,4 +58,5 @@ export class CanvasChartsComponent implements OnInit {
     exportAsXLSX() {
     this.localService.exportAsExcelFile(this.allStudentsDataForExcel, this.courseName);
  }
+
 }

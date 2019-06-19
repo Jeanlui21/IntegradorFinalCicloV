@@ -8,10 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PieComponent implements OnInit {
 
   @Input() datos: any[];
+  @Input() average: number;
 
   componentData: any[] = [];
   Students: string[] = [];
   Marks: number[] = [];
+  Percent: number[] = [];
   desaprobados: number[] = [];
   constructor() { }
   i = 0;
@@ -19,7 +21,9 @@ export class PieComponent implements OnInit {
     this.componentData = this.datos;
 // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.componentData.length; i ++ ) {
-      this.Marks.push(Math.round(this.componentData[i].grades.current_score * 0.20));
+      this.Marks.push((Math.round(this.componentData[i].grades.current_score * 0.20) / this.average) * 10);
+      const promedio =  ( (this.Marks.reduce( function (a, b) { return a + b; })) / this.Marks.length);
+
       this.Students.push(this.componentData[i].user.name);
     }
 
