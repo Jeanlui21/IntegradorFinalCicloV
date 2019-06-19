@@ -9,13 +9,13 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
 
-{ path: '', component: CanvasHomeComponent},
+
 { path: 'user/login', component: LoginComponent },
 { path: 'courses', component: CanvasCoursesComponent, canActivate: [AuthGuard] },
 { path: 'teachers', component: CanvasTeachersComponent, canActivate: [AuthGuard] },
 { path: 'graphics/:id', component: CanvasChartsComponent, canActivate: [AuthGuard]},
 
-{ path: '**', redirectTo: 'home' },
+{ path: '**', redirectTo: 'courses', canActivate: [AuthGuard] },
 
 ];
 

@@ -51,7 +51,7 @@ export class CanvasChartsComponent implements OnInit {
           this.allStudentsDataForExcel.push({ desaprobados: response[i].user.name});
         }
       }
-      this.allStudentsDataForExcel.push({ promedio: this.average});
+      this.allStudentsDataForExcel.push({promedio: this.average});
     });
   }
 

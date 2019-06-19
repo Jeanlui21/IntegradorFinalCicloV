@@ -23,6 +23,11 @@ export class CanvasMenuComponent implements OnInit {
       if (auth) {
         console.log('user logged');
         this.isLogged = true;
+        if ( this.router.url === '/user/login') {
+          this.router.navigate(['courses']);
+        } else {
+
+        }
       } else {
         console.log('NOT user logged');
         this.isLogged = false;
